@@ -1,7 +1,26 @@
+# VS Code
+.vscode/
+*.code-workspace
+
+# Archivos temporales de sistema
+*.dll
+*.exe
+*.log
+
+# Node y npm (si por alguna razón están presentes)
+node_modules/
+*.node
+
+# Archivos de configuración globales
+.gitconfig
+*.json
+
+# Archivos del entorno virtual de Python
 venv/
+.env
 __pycache__/
 *.pyc
+*.pyo
+
+# Archivos de Django que se pueden regenerar
 db.sqlite3
-.env
-.env.*
-.vscode/
