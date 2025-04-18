@@ -1,3 +1,4 @@
+from django.urls import path, include
 """
 URL configuration for config project.
 
@@ -19,5 +20,14 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    path('academico/', include('modulos.academico.urls')),
+    path('admision/', include('modulos.admision.urls')),
+    path('agenda/', include('modulos.agenda.urls')),
+    path('biblioteca/', include('modulos.biblioteca.urls')),
+    path('clases/', include('modulos.clases.urls')),
+    path('core/', include('modulos.core.urls')),
+    path('historico/', include('modulos.historico.urls')),
+    path('intranet/', include('modulos.intranet.urls')),
+    path('medico/', include('modulos.medico.urls')),
     path("admin/", admin.site.urls),
 ]
