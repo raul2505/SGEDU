@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "modulos.admision",
     "modulos.agenda",
     "modulos.biblioteca",
-    "modulo.clases",
+    "modulos.clases",
     "modulos.historico",
     "modulos.intranet",
     "modulos.medico"
@@ -58,6 +58,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+
+AUTH_USER_MODEL = 'core.Usuario'
 
 ROOT_URLCONF = "config.urls"
 

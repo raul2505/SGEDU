@@ -1,23 +1,21 @@
-from django.contrib.auth.models import  AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
-
-class Usuario (AbstractUser):
-    dni = models.CharField(max_length=8,unique=True)
-    telefono = models.IntegerField(max_length=9,unique=True)
-    direccion = models.CharField(max_length=30,blank=True)
+class Usuario(AbstractUser):
+    dni = models.CharField(max_length=8, unique=True)
+    telefono = models.CharField(max_length=15, unique=True)
+    direccion = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return f"{self.username}"
-    
-class PefilDocente(models.Model):
-    usuario = models.OneToOneField(Usuario,on_delete=models.CASCADE)
+
+class PerfilDocente(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     especialidad = models.CharField(max_length=20)
 
     def __str__(self):
         return f"Docente: {self.usuario.get_full_name()}"
-    
+
 class PerfilEstudiante(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     grado = models.CharField(max_length=10)
@@ -29,7 +27,7 @@ class PerfilEstudiante(models.Model):
 
 class PerfilPadre(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    hijos = models.ManyToManyField('PerfilEstudiante', related_name='padres')
+    hijos = models.ManyToManyField(PerfilEstudiante, related_name='padres')
 
     def __str__(self):
         return f"Padre/Tutor: {self.usuario.get_full_name()}"
@@ -40,14 +38,7 @@ class PerfilMedico(models.Model):
 
     def __str__(self):
         return f"Médico: {self.usuario.get_full_name()}"
-    
-class PerfilAdministrativo(models.Model):
-    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    cargo = models.CharField(max_length=100)
 
-    def __str__(self):
-        return f"Administrativo: {self.usuario.get_full_name()}"
-    
 class PerfilAdministrativo(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     cargo = models.CharField(max_length=100)

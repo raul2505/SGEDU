@@ -25,7 +25,7 @@ urlpatterns = [
     path('agenda/', include('modulos.agenda.urls')),
     path('biblioteca/', include('modulos.biblioteca.urls')),
     path('clases/', include('modulos.clases.urls')),
-    path('core/', include('modulos.core.urls')),
+    path('SGEDU', include('modulos.core.urls')),
     path('historico/', include('modulos.historico.urls')),
     path('intranet/', include('modulos.intranet.urls')),
     path('medico/', include('modulos.medico.urls')),
