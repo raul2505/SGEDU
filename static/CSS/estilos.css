@@ -1,0 +1,100 @@
+/* Fondo con imagen */
+.container {
+    background-image: url('../images/HomePage.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 15%;
+    padding-right: 5%;
+    position: relative;
+}
+
+/* Capa con fondo oscuro semitransparente */
+.overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 15px;
+    color: white;
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Botón personalizado */
+.btn {
+    display: flex;
+    /* Usamos flexbox para centrar el texto */
+    align-items: center;
+    /* Centra verticalmente el texto */
+    justify-content: center;
+    /* Centra horizontalmente el texto */
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #1e90ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0d6efd;
+}
+
+/* Responsive: tablets y celulares */
+@media (max-width: 1024px) {
+    .container {
+        padding-left: 10%;
+        justify-content: center;
+    }
+
+    .overlay {
+        padding: 30px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .overlay {
+        padding: 20px;
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        width: 100%;
+        /* El botón ocupa todo el ancho */
+        box-sizing: border-box;
+        /* Asegura que el botón no se salga del contenedor */
+    }
+}
+
+/* Estilo para el botón en pantallas pequeñas */
+@media (max-width: 768px) {
+    .btn {
+        width: 100%;
+        /* El botón ocupa todo el ancho */
+        padding: 14px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Estilo para el botón en dispositivos más pequeños */
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        /* El botón ocupa todo el ancho */
+        padding: 12px;
+        font-size: 1rem;
+    }
+}

@@ -1,7 +1,13 @@
 import os
 
+FORMS_TEMPLATE = '''from django import forms
+
+# Aquí puedes definir tus formularios para la app {app_name}
+'''
+
 TEMPLATE = '''from django.urls import path
 from . import views
+
 
 app_name = '{app_name}'
 
@@ -49,6 +55,15 @@ for nombre_app in os.listdir(ruta_modulos):
 
         else:
             print(f"⚠️ {nombre_app}/urls.py ya existe")
+        
+          # Crear forms.py si no existe
+        ruta_forms = os.path.join(ruta_app, 'forms.py')
+        if not os.path.exists(ruta_forms):
+            with open(ruta_forms, 'w', encoding='utf-8') as f:
+                f.write(FORMS_TEMPLATE.format(app_name=nombre_app))
+            print(f"✅ forms.py creado en {nombre_app}/")
+        else:
+            print(f"⚠️ {nombre_app}/forms.py ya existe")
 
         # Línea include a agregar
         linea_include = f"    path('{nombre_app}/', include('modulos.{nombre_app}.urls')),"
