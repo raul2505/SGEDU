@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework',
     "modulos.core",
     "modulos.academico",
     "modulos.admision",
@@ -92,12 +91,12 @@ from decouple import config
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sgedu',   # Aquí pon el nombre de tu base de datos (en minúscula en tu caso)
+        'USER': 'Erick',
+        'PASSWORD': '75279020',
+        'HOST': 'localhost',               # O IP si es remoto
+        'PORT': '3306',                    # Puerto por defecto de MySQL
     }
 }
 
