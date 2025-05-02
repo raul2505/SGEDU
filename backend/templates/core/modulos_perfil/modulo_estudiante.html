@@ -1,0 +1,106 @@
+<!-- prettier-ignore -->
+
+{% extends 'bases/base_estudiante.html' %}
+{% block title %} TRANSPORTE VERITO E.I.R.L {% endblock %}
+{% block page_title %} Tablero {% endblock %}
+{% block content %}
+<div class="row my-5">
+  <div class="col text-center">
+    <h1 class="display-4 fw-bold mb-4">Bienvenido</h1>
+    <p class="lead mb-4">
+      Accede a la información clave sobre cada uno de los cursos ofrecidos.
+    </p>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Curso de Matemáticas -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-light rounded">
+          <img
+            src="https://via.placeholder.com/400x200"
+            class="card-img-top"
+            alt="Curso Matemáticas"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Matemáticas</h5>
+            <p class="card-text">BLOQUE-F01TNSSD</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso de Lengua y Literatura -->
+      <div class="col-md-4">
+        <a
+          href="/curso/lengua-y-literatura"
+          class="card h-100 shadow-sm text-decoration-none text-dark"
+        >
+          <div class="card-body text-center">
+            <i class="fas fa-book fa-3x mb-3 text-success"></i>
+            <h5 class="card-title">Lengua y Literatura</h5>
+            <p class="card-text">
+              Explora la literatura, redacción, y comprensión lectora.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Curso de Ciencias Sociales -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-globe fa-3x mb-3 text-warning"></i>
+            <h5 class="card-title">Ciencias Sociales</h5>
+            <p class="card-text">
+              Conoce la historia, geografía y cultura mundial.
+            </p>
+            <a href="#" class="btn btn-warning">Ver Curso</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center mt-4">
+      <!-- Curso de Ciencias Naturales -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-atom fa-3x mb-3 text-info"></i>
+            <h5 class="card-title">Ciencias Naturales</h5>
+            <p class="card-text">
+              Descubre los secretos de la biología, física y química.
+            </p>
+            <a href="#" class="btn btn-info">Ver Curso</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso de Educación Física -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-futbol fa-3x mb-3 text-danger"></i>
+            <h5 class="card-title">Educación Física</h5>
+            <p class="card-text">
+              Participa en actividades físicas y deportes para tu bienestar.
+            </p>
+            <a href="#" class="btn btn-danger">Ver Curso</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso de Arte -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-palette fa-3x mb-3 text-warning"></i>
+            <h5 class="card-title">Arte</h5>
+            <p class="card-text">
+              Explora tu creatividad a través del dibujo, pintura y escultura.
+            </p>
+            <a href="#" class="btn btn-warning">Ver Curso</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

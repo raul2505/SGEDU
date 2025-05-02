@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/CSS/login.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../static/CSS/login.css" />
     <title>Login SGEDU</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="main-container">
-        <div id="left-container">
-            <form action="/">
-                <div id="logo-container">
-                    <img src="../../static/images/logoSGEDU.png" width="300px" alt="">
-                </div>
-                <div id="title-container">
-                    <h1>Bienvenidos</h1>
-                </div>
-    
-                <div id="inputs-container">
-                    <label for="username">USERNAME</label>
-                    <input type="text" name="username">
+      <div id="left-container">
+        <form method="POST">
+          {% csrf_token %}
+          <div id="logo-container">
+            <img src="../../static/images/logoSGEDU.png" width="300px" alt="" />
+          </div>
+          <div id="title-container">
+            <h1>Bienvenidos</h1>
+          </div>
 
-                    <label for="password">PASSWORD</label>
-                    <input type="password" name="password">
-                </div>
+          <div id="inputs-container">
+            <label for="username">USERNAME</label>
+            {{ form.username }}
 
-                <button type="submit" style="margin-top: 20px; padding: 12px; width: 100%; background-color: #4b59a0; color: white; border: none; border-radius: 10px; font-size: 16px;">Iniciar sesión</button>
+            <label for="password">PASSWORD</label>
+            {{ form.password }}
+          </div>
 
-    
-                <div id="options-container">
-                    <input type="checkbox" name="" id="">Mantenerme conectado
-                    <a href="#">Olvide mi password </a>
-                </div>
-                
-                
-                
-            </form>
-        </div>
-        
-        <div id="right-container"></div>
+          <button
+            type="submit"
+            style="
+              margin-top: 20px;
+              padding: 12px;
+              width: 100%;
+              background-color: #4b59a0;
+              color: white;
+              border: none;
+              border-radius: 10px;
+              font-size: 16px;
+            "
+          >
+            Iniciar sesión
+          </button>
+
+          <div id="options-container">
+            <input type="checkbox" name="" id="" />Mantenerme conectado
+            <a href="#">Olvide mi password </a>
+          </div>
+        </form>
+      </div>
+
+      <div id="right-container"></div>
     </div>
-</body>
+  </body>
 </html>
