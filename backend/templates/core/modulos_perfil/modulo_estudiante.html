@@ -1,106 +1,729 @@
 <!-- prettier-ignore -->
-
-{% extends 'bases/base_estudiante.html' %}
-{% block title %} TRANSPORTE VERITO E.I.R.L {% endblock %}
-{% block page_title %} Tablero {% endblock %}
+{% extends 'bases/base_estudiante.html' %} {% block title %} TRANSPORTE VERITO
+E.I.R.L {% endblock %} {% block page_title %} Tablero {% endblock %} 
 {% block content %}
-<div class="row my-5">
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  /* Estilos para el selector de color en cada tarjeta */
+  .card-color-picker {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    background: white;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+
+  .ic-DashboardCard__header:hover .card-color-picker {
+    display: block;
+  }
+
+  .card-color-option {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 2px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #ddd;
+  }
+
+  .courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px; /* Espacio entre tarjetas */
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .ic-DashboardCard {
+    width: 300px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+  }
+
+  .ic-DashboardCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .ic-DashboardCard__header {
+    position: relative;
+  }
+
+  .ic-DashboardCard__header_hero {
+    height: 150px;
+    background-color: #ac1d1d;
+    transition: background-color 0.3s;
+  }
+
+  .ic-DashboardCard__header_content {
+    padding: 16px;
+  }
+
+  .ic-DashboardCard__header-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ac1d1d;
+    transition: color 0.3s;
+  }
+
+  .ic-DashboardCard__header-subtitle {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #4d4d4d;
+  }
+
+  .ic-DashboardCard__header-term {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #737373;
+  }
+
+  .ic-DashboardCard__action-container {
+    display: flex;
+    border-top: 1px solid #e6e6e6;
+  }
+
+  .ic-DashboardCard__action {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    text-decoration: none;
+    color: #4d4d4d;
+    position: relative;
+    transition: background-color 0.2s;
+  }
+
+  .ic-DashboardCard__action:hover {
+    background-color: #f9f9f9;
+  }
+
+  .ic-DashboardCard__action-badge {
+    position: absolute;
+    top: 4px;
+    right: 12px;
+    background-color: #e0051e;
+    color: white;
+    border-radius: 10px;
+    font-size: 10px;
+    min-width: 16px;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 4px;
+  }
+
+  .ic-DashboardCard__action-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+
+  .ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Estilos para el selector de color */
+  .color-picker-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .color-option:hover {
+    transform: scale(1.1);
+  }
+
+  .color-option.selected {
+    border-color: #333;
+    transform: scale(1.1);
+  }
+
+  .custom-color-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .custom-color-input label {
+    font-weight: 600;
+  }
+
+  .custom-color-input input {
+    width: 80px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+</style>
+
+<div class="">
   <div class="col text-center">
     <h1 class="display-4 fw-bold mb-4">Bienvenido</h1>
     <p class="lead mb-4">
       Accede a la información clave sobre cada uno de los cursos ofrecidos.
     </p>
 
-    <div class="row g-4 justify-content-center">
+    <div class="courses-container">
       <!-- Curso de Matemáticas -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-light rounded">
-          <img
-            src="https://via.placeholder.com/400x200"
-            class="card-img-top"
-            alt="Curso Matemáticas"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Matemáticas</h5>
-            <p class="card-text">BLOQUE-F01TNSSD</p>
+      <div
+        class="ic-DashboardCard"
+        aria-label="MATEMATICA - 2025- FC-PREISI07A01N"
+        data-course-id="1"
+      >
+        <div class="ic-DashboardCard__header">
+          <div class="ic-DashboardCard__header_hero" aria-hidden="true"></div>
+          <div class="ic-DashboardCard__header_content">
+            <h2
+              class="ic-DashboardCard__header-title ellipsis"
+              title="MATEMATICA - 2025- FC-PREISI07A01N"
+            >
+              MATEMATICA - 2025- FC-PREISI07A01N
+            </h2>
+            <div
+              class="ic-DashboardCard__header-subtitle ellipsis"
+              title="MATEMATICA - 2025- FC-PREISI07A01N - (320481)"
+            >
+              MATEMATICA - (320481)
+            </div>
+            <div
+              class="ic-DashboardCard__header-term ellipsis"
+              title="1 - AMQS - SECUNDARIA - 2025"
+            >
+              1 - AMQS - SECUNDARIA - 2025
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Curso de Lengua y Literatura -->
-      <div class="col-md-4">
-        <a
-          href="/curso/lengua-y-literatura"
-          class="card h-100 shadow-sm text-decoration-none text-dark"
+        <nav
+          class="ic-DashboardCard__action-container"
+          aria-label="Acciones para el curso"
         >
-          <div class="card-body text-center">
-            <i class="fas fa-book fa-3x mb-3 text-success"></i>
-            <h5 class="card-title">Lengua y Literatura</h5>
-            <p class="card-text">
-              Explora la literatura, redacción, y comprensión lectora.
-            </p>
-          </div>
-        </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action announcements"
+            title="Anuncios"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-bullhorn me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">4</span>
+              </span>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action assignments"
+            title="Tareas"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-clipboard-list me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action discussions"
+            title="Foros de discusión"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-comment me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">2</span>
+              </span>
+            </div>
+          </a>
+          <a href="#" class="ic-DashboardCard__action files" title="Archivos">
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-folder-open me-2"></i>
+              </div>
+            </div>
+          </a>
+        </nav>
       </div>
-
-      <!-- Curso de Ciencias Sociales -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-globe fa-3x mb-3 text-warning"></i>
-            <h5 class="card-title">Ciencias Sociales</h5>
-            <p class="card-text">
-              Conoce la historia, geografía y cultura mundial.
-            </p>
-            <a href="#" class="btn btn-warning">Ver Curso</a>
+      <!-- CursoS -->
+      <!-- Curso 1: Lenguaje -->
+      <div
+        class="ic-DashboardCard"
+        aria-label="320482 - LENGUAJE - 2025-01 - FC-PREISI07A01N"
+        data-course-id="2"
+      >
+        <div class="ic-DashboardCard__header">
+          <div class="ic-DashboardCard__header_hero" aria-hidden="true"></div>
+          <div class="ic-DashboardCard__header_content">
+            <h2
+              class="ic-DashboardCard__header-title ellipsis"
+              title="LENGUAJE - 2025- FC-PREISI07A01N"
+            >
+              LENGUAJE - 2025- FC-PREISI07A01N
+            </h2>
+            <div
+              class="ic-DashboardCard__header-subtitle ellipsis"
+              title="LENGUAJE - (320482)"
+            >
+              LENGUAJE - (320482)
+            </div>
+            <div
+              class="ic-DashboardCard__header-term ellipsis"
+              title="1 - AMQS - SECUNDARIA - 2025"
+            >
+              1 - AMQS - SECUNDARIA - 2025
+            </div>
           </div>
         </div>
+        <nav
+          class="ic-DashboardCard__action-container"
+          aria-label="Acciones para el curso"
+        >
+          <a
+            href="#"
+            class="ic-DashboardCard__action announcements"
+            title="Anuncios"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-bullhorn me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">3</span>
+              </span>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action assignments"
+            title="Tareas"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-clipboard-list me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action discussions"
+            title="Foros de discusión"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-comment me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">1</span>
+              </span>
+            </div>
+          </a>
+          <a href="#" class="ic-DashboardCard__action files" title="Archivos">
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-folder-open me-2"></i>
+              </div>
+            </div>
+          </a>
+        </nav>
       </div>
-    </div>
 
-    <div class="row g-4 justify-content-center mt-4">
-      <!-- Curso de Ciencias Naturales -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-atom fa-3x mb-3 text-info"></i>
-            <h5 class="card-title">Ciencias Naturales</h5>
-            <p class="card-text">
-              Descubre los secretos de la biología, física y química.
-            </p>
-            <a href="#" class="btn btn-info">Ver Curso</a>
+      <!-- Curso 2: Historia -->
+      <div
+        class="ic-DashboardCard"
+        aria-label="320483 - HISTORIA - 2025-01 - FC-PREISI07A01N"
+        data-course-id="3"
+      >
+        <div class="ic-DashboardCard__header">
+          <div class="ic-DashboardCard__header_hero" aria-hidden="true"></div>
+          <div class="ic-DashboardCard__header_content">
+            <h2
+              class="ic-DashboardCard__header-title ellipsis"
+              title="HISTORIA - 2025- FC-PREISI07A01N"
+            >
+              HISTORIA - 2025- FC-PREISI07A01N
+            </h2>
+            <div
+              class="ic-DashboardCard__header-subtitle ellipsis"
+              title="HISTORIA - (320483)"
+            >
+              HISTORIA - (320483)
+            </div>
+            <div
+              class="ic-DashboardCard__header-term ellipsis"
+              title="1 - AMQS - SECUNDARIA - 2025"
+            >
+              1 - AMQS - SECUNDARIA - 2025
+            </div>
           </div>
         </div>
+        <nav
+          class="ic-DashboardCard__action-container"
+          aria-label="Acciones para el curso"
+        >
+          <a
+            href="#"
+            class="ic-DashboardCard__action announcements"
+            title="Anuncios"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-bullhorn me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">2</span>
+              </span>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action assignments"
+            title="Tareas"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-clipboard-list me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action discussions"
+            title="Foros de discusión"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-comment me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ic-DashboardCard__action files" title="Archivos">
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-folder-open me-2"></i>
+              </div>
+            </div>
+          </a>
+        </nav>
       </div>
 
-      <!-- Curso de Educación Física -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-futbol fa-3x mb-3 text-danger"></i>
-            <h5 class="card-title">Educación Física</h5>
-            <p class="card-text">
-              Participa en actividades físicas y deportes para tu bienestar.
-            </p>
-            <a href="#" class="btn btn-danger">Ver Curso</a>
+      <!-- Curso 3: Ciencias -->
+      <div
+        class="ic-DashboardCard"
+        aria-label="320484 - CIENCIAS - 2025-01 - FC-PREISI07A01N"
+        data-course-id="4"
+      >
+        <div class="ic-DashboardCard__header">
+          <div class="ic-DashboardCard__header_hero" aria-hidden="true"></div>
+          <div class="ic-DashboardCard__header_content">
+            <h2
+              class="ic-DashboardCard__header-title ellipsis"
+              title="CIENCIAS - 2025- FC-PREISI07A01N"
+            >
+              CIENCIAS - 2025- FC-PREISI07A01N
+            </h2>
+            <div
+              class="ic-DashboardCard__header-subtitle ellipsis"
+              title="CIENCIAS - (320484)"
+            >
+              CIENCIAS - (320484)
+            </div>
+            <div
+              class="ic-DashboardCard__header-term ellipsis"
+              title="1 - AMQS - SECUNDARIA - 2025"
+            >
+              1 - AMQS - SECUNDARIA - 2025
+            </div>
           </div>
         </div>
+        <nav
+          class="ic-DashboardCard__action-container"
+          aria-label="Acciones para el curso"
+        >
+          <a
+            href="#"
+            class="ic-DashboardCard__action announcements"
+            title="Anuncios"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-bullhorn me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">5</span>
+              </span>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action assignments"
+            title="Tareas"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-clipboard-list me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action discussions"
+            title="Foros de discusión"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-comment me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ic-DashboardCard__action files" title="Archivos">
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-folder-open me-2"></i>
+              </div>
+            </div>
+          </a>
+        </nav>
       </div>
 
-      <!-- Curso de Arte -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-palette fa-3x mb-3 text-warning"></i>
-            <h5 class="card-title">Arte</h5>
-            <p class="card-text">
-              Explora tu creatividad a través del dibujo, pintura y escultura.
-            </p>
-            <a href="#" class="btn btn-warning">Ver Curso</a>
+      <!-- Curso 4: Inglés -->
+      <div
+        class="ic-DashboardCard"
+        aria-label="320485 - INGLÉS - 2025-01 - FC-PREISI07A01N"
+        data-course-id="5"
+      >
+        <div class="ic-DashboardCard__header">
+          <div class="ic-DashboardCard__header_hero" aria-hidden="true"></div>
+          <div class="ic-DashboardCard__header_content">
+            <h2
+              class="ic-DashboardCard__header-title ellipsis"
+              title="INGLÉS - 2025- FC-PREISI07A01N"
+            >
+              INGLÉS - 2025- FC-PREISI07A01N
+            </h2>
+            <div
+              class="ic-DashboardCard__header-subtitle ellipsis"
+              title="INGLÉS - (320485)"
+            >
+              INGLÉS - (320485)
+            </div>
+            <div
+              class="ic-DashboardCard__header-term ellipsis"
+              title="1 - AMQS - SECUNDARIA - 2025"
+            >
+              1 - AMQS - SECUNDARIA - 2025
+            </div>
           </div>
         </div>
+        <nav
+          class="ic-DashboardCard__action-container"
+          aria-label="Acciones para el curso"
+        >
+          <a
+            href="#"
+            class="ic-DashboardCard__action announcements"
+            title="Anuncios"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-bullhorn me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action assignments"
+            title="Tareas"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-clipboard-list me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">1</span>
+              </span>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action discussions"
+            title="Foros de discusión"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-comment me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ic-DashboardCard__action files" title="Archivos">
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-folder-open me-2"></i>
+              </div>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Curso 5: Educación Física -->
+      <div
+        class="ic-DashboardCard"
+        aria-label="320486 - EDUCACIÓN FÍSICA - 2025-01 - FC-PREISI07A01N"
+        data-course-id="6"
+      >
+        <div class="ic-DashboardCard__header">
+          <div class="ic-DashboardCard__header_hero" aria-hidden="true"></div>
+          <div class="ic-DashboardCard__header_content">
+            <h2
+              class="ic-DashboardCard__header-title ellipsis"
+              title="EDUCACIÓN FÍSICA - 2025- FC-PREISI07A01N"
+            >
+              EDUCACIÓN FÍSICA - 2025- FC-PREISI07A01N
+            </h2>
+            <div
+              class="ic-DashboardCard__header-subtitle ellipsis"
+              title="EDUCACIÓN FÍSICA - (320486)"
+            >
+              EDUCACIÓN FÍSICA - (320486)
+            </div>
+            <div
+              class="ic-DashboardCard__header-term ellipsis"
+              title="1 - AMQS - SECUNDARIA - 2025"
+            >
+              1 - AMQS - SECUNDARIA - 2025
+            </div>
+          </div>
+        </div>
+        <nav
+          class="ic-DashboardCard__action-container"
+          aria-label="Acciones para el curso"
+        >
+          <a
+            href="#"
+            class="ic-DashboardCard__action announcements"
+            title="Anuncios"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-bullhorn me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action assignments"
+            title="Tareas"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-clipboard-list me-2"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="ic-DashboardCard__action discussions"
+            title="Foros de discusión"
+          >
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-comment me-2"></i>
+              </div>
+              <span class="ic-DashboardCard__action-badge">
+                <span class="unread_count">3</span>
+              </span>
+            </div>
+          </a>
+          <a href="#" class="ic-DashboardCard__action files" title="Archivos">
+            <div class="ic-DashboardCard__action-layout">
+              <div class="">
+                <i class="fas fa-folder-open me-2"></i>
+              </div>
+            </div>
+          </a>
+        </nav>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Colores predefinidos
+    const presetColors = [
+      "#ac1d1d",
+      "#2d8bba",
+      "#3a8339",
+      "#8b5a2b",
+      "#6a3d8b",
+      "#e67e22",
+      "#1abc9c",
+      "#d35400",
+      "#34495e",
+    ];
+
+    // Añadir selectores de color a cada tarjeta
+    const cards = document.querySelectorAll(".ic-DashboardCard");
+    cards.forEach((card) => {
+      const header = card.querySelector(".ic-DashboardCard__header");
+
+      // Crear selector de color
+      const colorPicker = document.createElement("div");
+      colorPicker.className = "card-color-picker";
+
+      // Añadir opciones de color
+      presetColors.forEach((color) => {
+        const colorOption = document.createElement("div");
+        colorOption.className = "card-color-option";
+        colorOption.style.backgroundColor = color;
+        colorOption.dataset.color = color;
+
+        colorOption.addEventListener("click", function () {
+          const headerHero = card.querySelector(
+            ".ic-DashboardCard__header_hero"
+          );
+          const title = card.querySelector(".ic-DashboardCard__header-title");
+
+          headerHero.style.backgroundColor = color;
+          title.style.color = color;
+        });
+
+        colorPicker.appendChild(colorOption);
+      });
+
+      header.appendChild(colorPicker);
+    });
+
+    // Opcional: Permitir color personalizado con doble clic
+  });
+</script>
 {% endblock %}

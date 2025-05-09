@@ -1,0 +1,182 @@
+<!-- prettier-ignore -->
+{% extends 'bases/base_personal_admi.html' %}
+{% block title %} SGEDU {% endblock %}
+{% block page_title %} Personal Administrativo {% endblock %}
+{% block content %}
+<div class="row my-5">
+  <div class="col-12 mb-5">
+    <section class="form-container p-4 bg-white rounded shadown-sm">
+      <h1 class="">Registrar Docente</h1>
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Datos de Usuario (BaseRegistroForm) -->
+        <h3>Datos de Usuario</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <!-- Username -->
+            <tr>
+              <td><label for="id_username">Nombre de usuario</label></td>
+              <td>{{ user_form.username }}</td>
+            </tr>
+
+            <!-- Email -->
+            <tr>
+              <td><label for="id_email">Email personal</label></td>
+              <td>{{ user_form.email }}</td>
+            </tr>
+
+            <!-- Correo institucional -->
+            <tr>
+              <td>
+                <label for="id_correo_institucional"
+                  >Correo institucional</label
+                >
+              </td>
+              <td>{{ user_form.correo_institucional }}</td>
+            </tr>
+
+            <!-- Nombre -->
+            <tr>
+              <td><label for="id_first_name">Nombres</label></td>
+              <td>{{ user_form.first_name }}</td>
+            </tr>
+
+            <!-- Apellido -->
+            <tr>
+              <td><label for="id_last_name">Apellidos</label></td>
+              <td>{{ user_form.last_name }}</td>
+            </tr>
+
+            <!-- DNI -->
+            <tr>
+              <td><label for="id_dni">DNI</label></td>
+              <td>
+                {{ user_form.dni }}<small class="form-text text-muted"
+                  >{{ user_form.dni.help_text }}</small
+                >
+              </td>
+            </tr>
+
+            <!-- Fecha nacimiento -->
+            <tr>
+              <td>
+                <label for="id_fecha_nacimiento">Fecha de nacimiento</label>
+              </td>
+              <td>{{ user_form.fecha_nacimiento }}</td>
+            </tr>
+
+            <!-- Género -->
+            <tr>
+              <td><label>Género</label></td>
+              <td>
+                {% for radio in user_form.genero %}
+                <div class="form-check form-check-inline">{{ radio }}</div>
+                {% endfor %}
+              </td>
+            </tr>
+
+            <!-- Teléfono -->
+            <tr>
+              <td><label for="id_telefono">Teléfono</label></td>
+              <td>
+                {{ user_form.telefono }}<small class="form-text text-muted"
+                  >{{ user_form.telefono.help_text }}</small
+                >
+              </td>
+            </tr>
+
+            <!-- Dirección -->
+            <tr>
+              <td><label for="id_direccion">Dirección</label></td>
+              <td>{{ user_form.direccion }}</td>
+            </tr>
+
+            <!-- Ubigeo -->
+            <tr>
+              <td><label for="id_departamento">Departamento</label></td>
+              <td>{{ user_form.departamento }}</td>
+            </tr>
+            <tr>
+              <td><label for="id_provincia">Provincia</label></td>
+              <td>{{ user_form.provincia }}</td>
+            </tr>
+            <tr>
+              <td><label for="id_distrito">Distrito</label></td>
+              <td>{{ user_form.distrito }}</td>
+            </tr>
+
+            <!-- Contraseñas -->
+            <tr>
+              <td><label for="id_password1">Contraseña</label></td>
+              <td>{{ user_form.password1 }}</td>
+            </tr>
+            <tr>
+              <td><label for="id_password2">Confirmar contraseña</label></td>
+              <td>{{ user_form.password2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Perfil Docente -->
+        <h3>Información Docente</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <!-- Especialidad -->
+            <tr>
+              <td><label for="id_especialidad">Especialidad</label></td>
+              <td>{{ perfil_form.especialidad }}</td>
+            </tr>
+
+            <!-- Grado educación -->
+            <tr>
+              <td>
+                <label for="id_grado_educacion">Grado de educación</label>
+              </td>
+              <td>{{ perfil_form.grado_educacion }}</td>
+            </tr>
+
+            <!-- CV -->
+            <tr>
+              <td><label for="id_curriculum_vitae">Curriculum Vitae</label></td>
+              <td>{{ perfil_form.curriculum_vitae }}</td>
+            </tr>
+
+            <!-- Horas trabajo -->
+            <tr>
+              <td><label for="id_horas_trabajo">Horas de trabajo</label></td>
+              <td>{{ perfil_form.horas_trabajo }}</td>
+            </tr>
+
+            <!-- Fecha contratación -->
+            <tr>
+              <td>
+                <label for="id_fecha_contratacion">Fecha de contratación</label>
+              </td>
+              <td>{{ perfil_form.fecha_contratacion }}</td>
+            </tr>
+
+            <!-- Especializaciones -->
+            <tr>
+              <td>
+                <label for="id_especializaciones">Especializaciones</label>
+              </td>
+              <td>{{ perfil_form.especializaciones }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </form>
+    </section>
+  </div>
+</div>
+
+{% endblock %}

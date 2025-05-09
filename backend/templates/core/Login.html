@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../static/CSS/login.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/login.css' %}?v={% now 'U'%}" />
     <title>Login SGEDU</title>
   </head>
   <body>
@@ -11,12 +12,17 @@
       <div id="left-container">
         <form method="POST">
           {% csrf_token %}
+          <div id="title-container">
+            <h1 class="welcome-title">Bienvenido al Sistema SGEDU</h1>
+          </div>
           <div id="logo-container">
             <img src="../../static/images/logoSGEDU.png" width="300px" alt="" />
           </div>
-          <div id="title-container">
-            <h1>Bienvenidos</h1>
-          </div>
+
+          <!-- Mensajes de error -->
+          {% if msg %}
+          <div id="alert-error">{{ msg }}</div>
+          {% endif %}
 
           <div id="inputs-container">
             <label for="username">USERNAME</label>

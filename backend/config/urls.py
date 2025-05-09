@@ -20,15 +20,14 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('core/', include('modulos.core.urls')),
-    path('academico/', include('modulos.academico.urls')),
-    path('admision/', include('modulos.admision.urls')),
-    path('agenda/', include('modulos.agenda.urls')),
-    path('biblioteca/', include('modulos.biblioteca.urls')),
-    path('clases/', include('modulos.clases.urls')),
-    path('', include('modulos.core.urls')),
-    path('historico/', include('modulos.historico.urls')),
-    path('intranet/', include('modulos.intranet.urls')),
-    path('medico/', include('modulos.medico.urls')),
+    path('', include('modulos.core.urls',namespace='core')),
+    path('academico/', include('modulos.academico.urls',namespace='academico')),
+    path('admision/', include('modulos.admision.urls',namespace='admision')),
+    path('agenda/', include('modulos.agenda.urls',namespace='agenda')),
+    path('biblioteca/', include('modulos.biblioteca.urls',namespace='biblioteca')),
+    path('clases/', include('modulos.clases.urls',namespace='clases')),
+    path('historico/', include('modulos.historico.urls',namespace='historico')),
+    path('intranet/', include('modulos.intranet.urls',namespace='intranet')),
+    path('medico/', include('modulos.medico.urls',namespace='medico')),
     path("admin/", admin.site.urls),
 ]
